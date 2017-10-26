@@ -3,7 +3,6 @@
 // A program to simulate Roulette table betting
 
 #include "stdafx.h"
-#include <ctime>
 
 
 int main()
@@ -18,6 +17,9 @@ int main()
 	// Construct 2/3rds bet
 	RouletteSim::style* two_thirds = new RouletteSim::style(winners, 3, 2, "two thirds");
 	
+	// Open file for writing results
+	std::ofstream SimData;
+
 	// Generate a number of players who will play for a finite number of spins (or until stop loss is reached)
 	int n_players = 100;
 	for (int j = 1; j <= n_players; j++) {
@@ -34,7 +36,7 @@ int main()
 		}
 		// Output result from each player
 		std::cout << person->getCash() << std::endl;
-		// Clear memory
+		// Clean person
 		delete person;
 	}
 
@@ -42,6 +44,7 @@ int main()
 
     return 0;
 }
+
 
 
 
