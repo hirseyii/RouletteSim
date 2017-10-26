@@ -74,12 +74,13 @@ namespace RouletteSim {
 	class player {
 	public:
 		// Constructor ----------------------------------------------------------------------------
-		player(int in_cash, int in_amount, std::string in_tag = "DEFAULT-PLAYER") {
+		player(int in_cash, int in_amount,int in_stop_loss, std::string in_tag = "DEFAULT-PLAYER") {
 		
 			std::cout << "CONSOLE>>> Generating player " + in_tag << std::endl;
 			tag = in_tag;
 			cash = in_cash;
 			bet_amount = in_amount;
+			stop_loss = in_stop_loss;
 		}
 		// Destructor -----------------------------------------------------------------------------
 		~player() { std::cout << "CONSOLE>>> Destroying player " + tag << std::endl; }
@@ -89,6 +90,7 @@ namespace RouletteSim {
 		int getCash() { return cash; }
 		int getBet_amount() { return bet_amount; }
 		std::string getTag() { return tag; }
+		int getStop_loss() { return stop_loss; }
 
 		//// set
 		void setCash(int a) { cash = a; }
@@ -101,6 +103,12 @@ namespace RouletteSim {
 
 		// add cash 
 		void addCash(int amount) { cash += amount; }
+
+		// Does player want to keep playing or have they reached their loss limit (stop loss)
+		bool Continue() {
+			if (cash <= stop_loss) { return false; }
+			else { return true; }
+		}
 		
 		
 	private:
@@ -108,6 +116,7 @@ namespace RouletteSim {
 		int cash;
 		int bet_amount;
 		std::string tag;
+		int stop_loss;
 		
 	};
 
